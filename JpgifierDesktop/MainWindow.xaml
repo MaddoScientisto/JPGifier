@@ -1,0 +1,22 @@
+﻿<Window x:Class="JpgifierDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JpgifierDesktop"
+        mc:Ignorable="d"
+        Title="Image JPGifier" Height="249" Width="330">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="97*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Left" Margin="37,42,0,0" Text="20" x:Name="QualityText" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Button Content="JPGify" HorizontalAlignment="Left" Margin="53,165,0,0" VerticalAlignment="Top" Click="Button_Click" Height="44" Width="146" Grid.Column="1"/>
+        <TextBox HorizontalAlignment="Left" Margin="37,89,0,0" Text="10" x:Name="RepetitionsBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Label Content="Quality" HorizontalAlignment="Left" Margin="25,40,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Repetitions" HorizontalAlignment="Left" Margin="7,85,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <CheckBox Content="Resize (increases artifacts for each repetition)" HorizontalAlignment="Left" Margin="20,124,0,0" VerticalAlignment="Top" x:Name="ResizeCheckbox" Grid.ColumnSpan="2" />
+
+    </Grid>
+</Window>

@@ -1,0 +1,63 @@
+﻿@page "/"
+@using System.IO
+@using SixLabors.ImageSharp
+@using SixLabors.ImageSharp.Formats.Jpeg
+
+bruh
+
+<SfUploader AutoUpload="false">
+    <UploaderEvents ValueChange="OnChange"></UploaderEvents>
+</SfUploader>
+
+@code
+{
+    private void OnChange(UploadChangeEventArgs args)
+    {
+        foreach (var file in args.Files)
+        {
+
+            var sr = new MemoryStream();
+
+
+            using (Image image = Image.Load(file.Stream, new JpegDecoder()))
+            {
+                image.SaveAsJpeg(sr, new JpegEncoder() { Quality = 0 });
+            }
+
+            using Stream s = MultiCompress(file.Stream, 10);
+
+
+            var path = @"path" + file.FileInfo.Name;
+            FileStream filestream = new FileStream(path, FileMode.Create, FileAccess.Write);
+            file.Stream.WriteTo(filestream);
+            filestream.Close();
+            file.Stream.Close();
+        }
+    }
+
+    private Stream MultiCompress(Stream stream, int times)
+    {
+
+
+
+        using Stream s = new MemoryStream();
+
+
+        var img = Image.Load(stream);
+
+
+        img.SaveAsJpeg(s, new JpegEncoder() { Quality = 0 });
+        times--;
+        if (times > 0)
+        {
+            return MultiCompress(s, times);
+        }
+        else
+        {
+            return s;
+        }
+
+
+
+    }
+}
