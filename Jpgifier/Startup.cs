@@ -8,8 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Syncfusion.Blazor;
 
 namespace Jpgifier
@@ -36,7 +38,9 @@ namespace Jpgifier
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("");
+            
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(GetSyncfusionLicense());
 
             if (env.IsDevelopment())
             {
@@ -59,6 +63,12 @@ namespace Jpgifier
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+        }
+
+        private string GetSyncfusionLicense()
+        {
+            JObject o1 = JObject.Parse(File.ReadAllText(@"License.json"));
+            return o1["Syncfusion"].ToString();
         }
     }
 }
